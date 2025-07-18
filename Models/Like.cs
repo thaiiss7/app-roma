@@ -2,6 +2,7 @@ namespace AppRoma.Models;
 
 public class Like
 {
+    public Guid ID { get; set; }
     public bool Liked { get; set; }
     public ICollection<Profile> Profiles { get; set; }
 }
