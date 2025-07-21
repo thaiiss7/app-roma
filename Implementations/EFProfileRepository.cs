@@ -46,4 +46,5 @@ public class EFProfileRepository(AppRomaDbContext ctx) : IProfileRepository
         return await ctx.Profiles
             .ToListAsync();
     }
+
 }
