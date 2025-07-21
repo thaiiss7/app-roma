@@ -8,12 +8,19 @@ public class AppRomaDbContext(DbContextOptions options) : DbContext(options)
     public DbSet<Profile> Profiles => Set<Profile>();
     protected override void OnModelCreating(ModelBuilder model)
     {
-        model.Entity<Like>();
+        model.Entity<Like>()
+            .HasOne(l => l.LikedProfiles)
+            .WithMany(u => u.ReceivedLikes)
+            .HasForeignKey(l => l.LikedProfileID)
+            .OnDelete(DeleteBehavior.NoAction);
 
-        model.Entity<Profile>()
-            .HasMany(p => p.Likes)
-            .WithMany(l => l.Profiles)
-            .UsingEntity(j => j.ToTable("LikeProfile"));
+        model.Entity<Like>()
+            .HasOne(l => l.LikedByProfiles)
+            .WithMany(u => u.Likes)
+            .HasForeignKey(l => l.LikedByProfielID)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        model.Entity<Profile>();
     }
 }
 

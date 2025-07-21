@@ -4,8 +4,9 @@ namespace AppRoma.Services;
 
 public interface IProfileRepository
 {
-   Task<Profile> GetbyId(Guid id);
-   Task<Guid> Create(Profile profile);
-   Task<IEnumerable<Profile>> Search(string name);
-   //listar os perfis é importante?
+   Task<Guid?> Create(Profile profile);
+   Task<Guid?> Login(string username, string password);
+   Task<Profile?> GetbyId(Guid id);
+   Task<IEnumerable<Profile>> Search();
+   Task? Delete(Guid id);
 }
