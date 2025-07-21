@@ -32,6 +32,5 @@ public class EFLikeRepository(AppRomaDbContext ctx) : ILikeRepository
             .FirstOrDefaultAsync();
 
         return user.Likes;
-
     }
 }
