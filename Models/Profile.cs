@@ -9,6 +9,7 @@ public class Profile
     public int Age { get; set; }
     public string ?Location { get; set; }
     public string ?Interests { get; set; }
+    public string ?Bio { get; set; }
     public ICollection<Like> Likes { get; set; } = [];
     public ICollection<Like> ReceivedLikes { get; set; } = [];
 }

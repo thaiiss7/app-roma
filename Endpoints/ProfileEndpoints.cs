@@ -71,7 +71,12 @@ public static class ProfileEndpoints
                 if (user == null)
                     return Results.NotFound();
                 
-                return Results.Ok(user);
+                return Results.Ok(
+                    user.Name
+                    user.Age
+                    user.Location
+                    user.Interests
+                    user.Bio);
             });
     }
 }
