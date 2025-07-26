@@ -1,5 +1,13 @@
-Perfil
-Login
-Bucar pessoas
+Perfil (feito)
+Login (feito)
+Bucar pessoas (feito)
 Dar match
 Endpoint para sugerir o usuario só algumas infos
+
+--
+
+Post/user (feito)
+Post/auth (feito)
+Get/feed (feito)
+Post/like
+Get/user/{id} (feito)

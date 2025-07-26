@@ -40,10 +40,38 @@ public static class ProfileEndpoints
             [FromBody] ProfileCreatePayload profile,
             [FromServices] IProfileRepository repo) =>
             {
-                // var user = await repo.Search(profile.Username);
-                // repo.
+                // Busca todos os perfis
+                var feed = await repo.Search();
+                // Retira o perfil do usuário
+                feed = feed.Where(p => p.Guid != profile.Guid).ToList();
+
+                // Filtra por idade e localização
+                feed = feed.Where(p => p.Age >= profile.Age - 5 
+                && p.Age <= profile.Age + 5).ToList();
+                feed = feed.Where(p => p.Location == profile.Location).ToList();
+
+                if (feed.Count == 0)
+                    return Results.NotFound();
+
+                // Sorteia um perfil aleatório
+                var random = new Random();
+                var randomProfile = feed[random.Next(feed.Count)];
+
+                return Results.Ok(randomProfile);
                 
             }
         );
+
+        app.MapGet("profile/{id}", async (
+            Guid id,
+            [FromBody] ProfileCreatePayload profile,
+            [FromServices] IProfileRepository repo) =>
+            {
+                var user = await repo.GetbyId(id);
+                if (user == null)
+                    return Results.NotFound();
+                
+                return Results.Ok(user);
+            });
     }
 }
